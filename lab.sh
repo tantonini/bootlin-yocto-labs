@@ -14,7 +14,7 @@ source "$POKY_DIR/oe-init-build-env" "$BUILD_DIR"
 set -ux
 
 # Remove layer added into poky at lab3
-if [ -d "$POKY_DIR/meta/recipes-extended/ninvaders" ]; then
+if [ -L "$POKY_DIR/meta/recipes-extended/ninvaders" ]; then
 	rm "$POKY_DIR/meta/recipes-extended/ninvaders"
 fi
 
