@@ -6,6 +6,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz"
 EXTRA_OEMAKE:append = "-e"
 CFLAGS:append = " -fcommon"
 
+SRC_URI += "file://joystick-support.patch"
+
 do_install() {
         install -d ${D}${bindir}
         install -m 755 nInvaders ${D}${bindir}/ninvaders
