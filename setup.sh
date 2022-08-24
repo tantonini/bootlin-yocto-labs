@@ -3,17 +3,24 @@
 set -eux
 
 BOOTLIN_YOCTO_DIR="$HOME/trainings/bootlin-yocto"
+POKY_SRC="$HOME/sources/poky"
 POKY_DIR="$BOOTLIN_YOCTO_DIR/poky"
 META_ARM_DIR="$BOOTLIN_YOCTO_DIR/meta-arm"
 META_TI_DIR="$BOOTLIN_YOCTO_DIR/meta-ti"
 BUILD_DIR="$BOOTLIN_YOCTO_DIR/build"
 BOOTLIN_YOCTO_LABS_DIR="$BOOTLIN_YOCTO_DIR/bootlin-yocto-labs"
 
-if [ ! -d "$POKY_DIR" ]; then
-	pushd "$BOOTLIN_YOCTO_DIR" || exit
+if [ ! -d "$POKY_SRC" ]; then
+	pushd "$HOME/sources" || exit
 	git clone https://git.yoctoproject.org/git/poky
 	cd poky || exit
-	git checkout -b kirkstone-4.0.2 kirkstone-4.0.2
+	git worktree add "$POKY_DIR" kirkstone-4.0.2
+	popd || exit
+fi
+
+if [ ! -d "$POKY_DIR" ]; then
+	pushd "$POKY_SRC" || exit
+	git worktree add "$POKY_DIR" kirkstone-4.0.2
 	popd || exit
 fi
 
